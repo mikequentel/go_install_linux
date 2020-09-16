@@ -1,7 +1,11 @@
 #!/bin/bash
 DOWNLOAD_URL_PREFIX=https://dl.google.com/go
-TAR_BALL=go1.12.4.linux-amd64.tar.gz
-curl -LO ${DOWNLOAD_URL_PREFIX}/${TAR_BALL}
+TAR_BALL=go1.15.2.linux-amd64.tar.gz
+sudo rm -fr /usr/local/go || true
+if [ ! -f ${TAR_BALL} ]; then
+  echo "downloading ${DOWNLOAD_URL_PREFIX}/${TAR_BALL}"
+  curl -LO ${DOWNLOAD_URL_PREFIX}/${TAR_BALL}
+fi
 sudo tar -C /usr/local -xzf ${TAR_BALL}
 if [ -f ~/.bashrc ]; then
   cp ~/.bashrc ~/.bashrc.BAK
